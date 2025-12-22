@@ -1,105 +1,205 @@
-# Complaint Clustering Engine
+## Complaint Clustering Engine
 
-## Project Description
-The Complaint Clustering Engine is an unsupervised machine learning system that
-automatically groups customer complaints into meaningful clusters without using
-predefined labels. The goal of the project is to help humans quickly understand
-common complaint themes using cluster keywords and sample complaints.
+## Project Overview
+
+The Complaint Clustering Engine is a machine learning project that helps organize customer complaints into meaningful groups automatically. Instead of manually reading and sorting complaints, this system uses unsupervised machine learning to discover common problem areas from raw complaint text.
+
+The main goal of this project is understanding and interpretation, not just accuracy. The clusters help identify what customers are actually struggling with.
+
 
 ---
 
 ## Problem Statement
-When the number of customer complaints is large, manual analysis becomes
-time-consuming and inefficient. There is a need for a system that can automatically
-identify common complaint themes without requiring predefined categories.
+
+Companies receive a large number of customer complaints every day through different platforms like apps, emails, and customer support systems. Reading and categorizing these complaints manually is slow and difficult, especially when the number of complaints grows.
+
+Also, complaint categories are often not clearly defined in advance, making automation challenging.
+
 
 ---
 
-## Input Mechanism
-- Input is provided through a CSV file.
-- The CSV file must contain a column named complaint_text.
-- Each row represents a single customer complaint.
+## Solution Approach
+
+This project provides an automated way to analyze complaints by:
+
+Accepting raw complaint text
+Finding hidden patterns using machine learning
+Grouping similar complaints together
+Helping users understand each group through keywords and examples
+
+The system works without any predefined labels, making it flexible for different datasets.
+
 
 ---
 
-## Methodology
+## Key Features
 
-1. Customer complaint text is collected and loaded from a CSV file.
-2. Text preprocessing is applied:
-   - Conversion to lowercase
-   - Removal of special characters
-   - Stopword removal
-   - Lemmatization
-3. Cleaned text is converted into numerical form using sentence embeddings
-   generated from a pre-trained BERT model.
-4. K-Means clustering is applied to group similar complaints without predefined labels.
-5. TF-IDF is used only for extracting important keywords from each cluster.
-6. Sample complaints and keywords are displayed to support human interpretation.
+Upload one or more CSV files containing complaints
+Add complaints manually in real time
+Automatically group complaints using machine learning
+Visualize how complaints are distributed across clusters
+Allow users to name clusters in simple words
+Delete incorrect or irrelevant complaints easily
+Display all complaints inside each cluster
+
+
 
 ---
 
-## Machine Learning Used
+## Input Format
 
-- *Type:* Unsupervised Machine Learning
-- *Text Representation:* BERT-based Sentence Embeddings (all-MiniLM-L6-v2)
-- *Clustering Algorithm:* K-Means
-- *Keyword Extraction:* TF-IDF
+The system accepts CSV files with a single column named:
 
-The machine learning model groups complaints based on semantic similarity rather
-than exact word matching.
+complaint_text
 
----
+Example:
 
-## Interactive Dashboard
+Payment failed but money was deducted
+Delivery arrived later than promised
+App crashes after login
 
-A Streamlit-based dashboard is provided where users can:
-- Upload a complaint dataset
-- Select the number of clusters
-- View cluster-wise complaint distribution
-- Analyze top keywords and sample complaints
+Complaints can also be added directly through the dashboard.
 
-This makes the system interactive and user-friendly.
 
 ---
 
-## Interpretation Note
-The clustering results are not final labels. Users must interpret each cluster by
-analyzing the keywords and sample complaints and assign human-readable theme names.
-Interpretation is more important than perfect clustering.
+## How Machine Learning Is Used
+
+Text Cleaning
+
+Each complaint is cleaned by:
+
+Converting text to lowercase
+Removing special characters
+Removing common stopwords
+Converting words to their base form
+
+
+This makes the text easier for the model to understand.
+
+
+---
+
+## Understanding Meaning with BERT
+
+The project uses a pretrained BERT-based model to convert each complaint into a numerical form that represents its meaning. This allows the system to group complaints that mean the same thing even if the wording is different.
+
+For example:
+
+Amount debited but payment failed
+Money deducted but transaction unsuccessful
+
+
+These will likely be grouped together.
+
+
+---
+
+## Clustering with K-Means
+
+Once the complaints are converted into vectors, K-Means clustering is applied. This algorithm groups similar complaints together without knowing the categories beforehand.
+
+The user can control how many clusters they want based on the dataset size.
+
+
+---
+
+## Making Clusters Understandable
+
+Since machine learning does not label clusters automatically:
+
+Important keywords are extracted for each cluster
+All complaints in a cluster are displayed
+Users assign meaningful names to each cluster
+
+
+This makes the results easy to interpret.
+
 
 ---
 
 ## Output
-For each cluster, the system displays:
-- Cluster number
-- Number of complaints
-- Top keywords
-- Sample complaints
+
+For each cluster, the system shows:
+
+Cluster name (given by the user)
+Number of complaints
+Key terms related to the issue
+All complaints belonging to that cluster
+A bar chart showing complaint distribution
+
+
 
 ---
 
-## How to Run
+## Real-Time Usage
 
-1. Install required libraries:
-   pip install pandas scikit-learn nltk sentence-transformers streamlit
+Complaints can be added while the system is running. When new complaints are added:
 
-2. Run the application:
-   python -m streamlit run app.py
+Clusters update automatically
+Charts refresh instantly
+Emerging issues can be detected early
 
-3. Upload a CSV file containing complaint data.
+
+
+---
+
+## Managing Complaints
+
+Users can remove a specific complaint by selecting:
+
+1. The cluster
+
+2. The complaint
+
+3. Clicking delete
+
+This helps keep the data clean and relevant.
+
+
+---
+
+## Tools and Technologies Used
+
+Python
+Streamlit for the web interface
+SentenceTransformers (BERT) for text understanding
+Scikit-learn for clustering
+NLTK for text preprocessing
+Matplotlib for visualization
+
+
+
+---
+
+## How to Run the Project
+
+One-Time Setup
+pip install streamlit pandas scikit-learn sentence-transformers nltk matplotlib
+Run the Application
+python -m streamlit run app.py
+
+
+---
+
+## Important Note
+
+This project is designed to support human analysis. Clusters may change when new complaints are added or removed. Human interpretation plays a key role in understanding and naming clusters.
+
+
+---
+
+## Possible Future Improvements
+
+Automatically suggest cluster names
+Track complaint trends over time
+Add alerts for sudden complaint spikes
+Support complaints in multiple languages
 
 ---
 
 ## Conclusion
-This project demonstrates how unsupervised machine learning can be used to discover
-hidden patterns in customer complaints. By combining semantic embeddings, clustering,
-and human interpretation, the system provides meaningful insights without requiring
-predefined labels.
 
----
+The Complaint Clustering Engine demonstrates how unsupervised machine learning can be used to turn unstructured customer complaints into meaningful insights. It focuses on clarity, usability, and real-world applicability rather than just technical accuracy.
 
-## Future Enhancements
-- Automatic theme naming
-- Trend analysis over time
-- Multilingual complaint support
-- Advanced visual analytics
+The Complaint Clustering Engine demonstrates how unsupervised machine learning can be used to turn unstructured customer complaints into meaningful insights. It focuses on clarity, usability, and real-world applicability rather than just technical accuracy.
